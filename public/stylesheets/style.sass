@@ -1,0 +1,131 @@
+@import "font-awesome-4.7.0/scss/font-awesome.scss"
+// $primary-color: #D81B60
+$primary-color: #03a9f4
+$secondary-color: #ffffff
+
+body, html
+  height: 100%
+  font-size: 14px
+  font-family: 'Open Sans', sans-serif
+  background: $secondary-color
+  margin: 0
+  padding: 0
+
+#header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1rem
+  background: $primary-color
+  color: $secondary-color
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+#back
+  margin-right: 2rem
+
+#content
+  margin: 0
+
+.room
+  background: $secondary-color
+  display: inline-block
+  width: 100%
+  height: 100%
+  margin: 0rem
+
+.full
+  position: static !important
+  width: 100% !important
+  height: 100% !important
+  margin: 0 !important
+  padding: 0 !important
+  box-shadow: none !important
+  background: $secondary-color !important
+
+.room.full div.service-title
+  padding: 1rem 2rem
+
+.service-title
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1rem
+  background: $primary-color
+  color: $secondary-color
+  font-size: 1.3rem
+
+.room-buttons
+  display: flex
+
+.room-content
+  padding: 2rem
+
+.fa
+  width: 18px
+  margin-right: 0.3rem
+  color: $primary-color
+
+.fa-cloud:before
+  margin-left: -0.3rem
+
+i.fa.fa-circle-o-notch.fa-spin.fa-3x.fa-fw
+  font-size: 15px
+
+@media (min-width: 283px)
+  body, html
+    font-size: 16px
+
+@media (min-width: 700px)
+  body, html
+    background: #eeeeee
+  header
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26)
+    font-size: 2rem
+  #header
+    border-bottom: none
+    padding: 2rem
+
+  #content
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    margin-top: 2.5rem
+
+  p
+    font-size: 1.3rem
+    margin-bottom: 2rem
+
+  .service-title
+    font-size: 2rem
+
+  .room
+    background: #ffffff
+    display: inline-block
+    width: 383px
+    min-height: 350px
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26)
+    margin: 2rem
+
+  p
+    color: #343434
+
+  .arrow-down
+    margin: 0 auto
+    width: 0
+    height: 0
+    border-width: 1.5rem 1.5rem 0
+    border-style: solid
+    border-color: $primary-color transparent transparent transparent
+
+  @media (min-width: 1358px)
+    #content
+      justify-content: left
+
+  @media (min-width: 1400px)
+    #content
+      width: 1355px
+      position: absolute
+      left: 0
+      right: 0
+      margin: 0 auto
+      top: 8rem
