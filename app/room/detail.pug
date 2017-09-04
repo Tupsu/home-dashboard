@@ -4,10 +4,10 @@ block content
     span=rooms[0].name
     div
       if prevPage != null
-        a(href=`/room?offset=${prevPage}`)
+        a(href=`/room/${prevPage}`)
           img(id="back" src="/images/ic_arrow_back_white_36px.svg")
       if nextPage != null
-        a(id="next-page" href=`/room?offset=${nextPage}`)
+        a(id="next-page" href=`/room/${nextPage}`)
           img(src="/images/ic_arrow_forward_white_36px.svg")
   div#content.full
     div.room.full

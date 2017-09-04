@@ -1,7 +1,9 @@
+let getOffsetFrom = (pageNumber, limit) => pageNumber === 1 ? 0 : (pageNumber - 1) * limit;
 let getPageNumber = (offset, limit) => offset / limit + 1;
 let getPageCount = (totalCount, limit) => Math.ceil(totalCount / limit);
-let nextPage = (pageNumber, pageCount, offset, limit) => pageNumber === pageCount ? null : offset + limit;
-let prevPage = (pageNumber, offset, limit) => pageNumber === 1 ? null : offset - limit;
+let nextPage = (pageNumber, pageCount) => pageNumber === pageCount ? null : pageNumber + 1;
+let prevPage = (pageNumber) => pageNumber === 1 ? null : pageNumber - 1;
+module.exports.getOffsetFrom = getOffsetFrom;
 module.exports.getPageNumber = getPageNumber;
 module.exports.getPageCount = getPageCount;
 module.exports.nextPage = nextPage;
