@@ -1,0 +1,7 @@
+extends ../../views/layout
+include mixins/nav-header
+include mixins/room-content
+
+block content
+  +nav-header('/room/', prevPage, nextPage, title)
+  +room-content('full')

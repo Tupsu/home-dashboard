@@ -1,5 +1,3 @@
-@import "font-awesome-4.7.0/scss/font-awesome.scss"
-// $primary-color: #D81B60
 $primary-color: #03a9f4
 $secondary-color: #ffffff
 
@@ -11,10 +9,11 @@ body, html
   margin: 0
   padding: 0
 
-#header
+header
   display: flex
   justify-content: space-between
   align-items: center
+  font-size: 2rem
   padding: 1rem
   background: $primary-color
   color: $secondary-color
@@ -23,7 +22,7 @@ body, html
 #back
   margin-right: 2rem
 
-#content
+main
   margin: 0
 
 .room
@@ -42,16 +41,7 @@ body, html
   box-shadow: none !important
   background: $secondary-color !important
 
-.room.full div.service-title
-  padding: 1rem 2rem
-
-.service-title
-  display: flex
-  justify-content: space-between
-  align-items: center
-  padding: 1rem
-  background: $primary-color
-  color: $secondary-color
+.room header
   font-size: 1.3rem
 
 .room-buttons
@@ -80,12 +70,8 @@ i.fa.fa-circle-o-notch.fa-spin.fa-3x.fa-fw
     background: #eeeeee
   header
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26)
-    font-size: 2rem
-  #header
-    border-bottom: none
-    padding: 2rem
 
-  #content
+  main
     display: flex
     justify-content: center
     flex-wrap: wrap
@@ -95,7 +81,7 @@ i.fa.fa-circle-o-notch.fa-spin.fa-3x.fa-fw
     font-size: 1.3rem
     margin-bottom: 2rem
 
-  .service-title
+  .room-title
     font-size: 2rem
 
   .room
@@ -109,20 +95,12 @@ i.fa.fa-circle-o-notch.fa-spin.fa-3x.fa-fw
   p
     color: #343434
 
-  .arrow-down
-    margin: 0 auto
-    width: 0
-    height: 0
-    border-width: 1.5rem 1.5rem 0
-    border-style: solid
-    border-color: $primary-color transparent transparent transparent
-
   @media (min-width: 1358px)
-    #content
+    main
       justify-content: left
 
   @media (min-width: 1400px)
-    #content
+    main
       width: 1355px
       position: absolute
       left: 0

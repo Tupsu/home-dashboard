@@ -6,7 +6,7 @@ const nodemon     = require('gulp-nodemon');
 
 
 gulp.task('lint', () => {
-  return gulp.src(['gulpfile.js', 'app.js', './app/**/*.js'])
+  return gulp.src(['gulpfile.js', './app/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format());
 });
@@ -16,9 +16,9 @@ gulp.task('nodemon', (cb) => {
   nodemon({
     nodeArgs: ['--inspect'],
     debug: true,
-    script: 'bin/www',
+    script: 'app/server.js',
     ext: '.js',
-    ignore: ['public/**/*.js', 'node_modules/**/*.js', 'gulpfile.js', 'public/**/*.sass', 'public/**/*.css'],
+    ignore: ['app/public/**/*.js', 'node_modules/**/*.js', 'gulpfile.js', 'app/public/**/*.sass', 'app/public/**/*.css'],
     env: {
       'NODE_ENV': 'development',
       'DEBUG': 'home-dashboard:*'
@@ -37,19 +37,19 @@ gulp.task('browser-sync', ['nodemon'], () => {
   browserSync.init({
     proxy: 'localhost:3000',
     port: 8000,
-    files: ['public/images', 'app/**/*.pug']
+    files: ['app/public/images', 'app/**/*.pug']
   });
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['app.js', './app/**/*.js'], ['lint']);
-  gulp.watch("public/stylesheets/*.sass", ['sass']);
+  gulp.watch(['./app/**/*.js'], ['lint']);
+  gulp.watch("app/public/stylesheets/*.sass", ['sass']);
 });
 
 gulp.task('sass', function() {
-  let stream = gulp.src("public/stylesheets/*.sass")
+  let stream = gulp.src("app/public/stylesheets/*.sass")
     .pipe(sass())
-    .pipe(gulp.dest("public/stylesheets/"));
+    .pipe(gulp.dest("app/public/stylesheets/"));
   if (browserSync.active) {
     stream = stream.pipe(browserSync.stream());
   }

@@ -1,31 +1,38 @@
+let Room = require('./room');
+let Page = require('./page');
 let config = require('../config');
-let room = require('./room-api');
-let page = require('../page');
 
-let getPageTitle = () => config.appName;
+let RoomPage = class RoomPage extends Page {
+  constructor(options = {}) {
+    super(options);
+    this.room = new Room();
+  }
 
-async function getPageData(pageNumber, limit) {
-  let offset     = page.getOffsetFrom(pageNumber, limit);
-  let totalCount = await room.count();
-  let rooms      = await room.get(offset, limit);
-  totalCount     = parseInt(totalCount[0].count, 10);
-  let pageCount  = page.getPageCount(totalCount, limit);
-  return {
-    title:      getPageTitle(),
-    totalCount: totalCount,
-    pageNumber: pageNumber,
-    pageCount:  pageCount,
-    prevPage:   page.prevPage(pageNumber),
-    nextPage:   page.nextPage(pageNumber, pageCount),
-    rooms:      rooms,
-    offset:     offset
-  };
-}
+  isDetailPage() {
+    return this.pageSize === 1;
+  }
 
-let render = ({view, pageNumber, res, limit=config.pageSize} = {}) => {
-  getPageData(pageNumber, limit)
-    .then(pageData => res.render(view, pageData))
-    .catch(error => console.error(error));
+  async create() {
+    this.itemCount = await this.room.count();
+    this.rooms     = await this.room.get(this.getOffset(), this.pageSize);
+
+    this.pageData = {
+      title:      this.isDetailPage() ? this.rooms[0].name : config.appName,
+      pageNumber: this.pageNumber,
+      pageCount:  this.getPageCount(),
+      pageSize:   this.pageSize,
+      prevPage:   this.prevPage(),
+      nextPage:   this.nextPage(),
+      rooms:      this.rooms,
+      offset:     this.getOffset()
+    };
+  }
+
+  render(res) {
+    if (this.isDetailPage())
+      res.render('room/views/detail', this.pageData);
+    else
+      res.render('room/views/index', this.pageData);
+  }
 };
-
-module.exports.render = render;
+module.exports = RoomPage;

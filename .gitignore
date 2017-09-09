@@ -1,2 +1,2 @@
 node_modules/
-/public/stylesheets/*.css
+/app/public/stylesheets/*.css

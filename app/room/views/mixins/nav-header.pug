@@ -1,0 +1,12 @@
+mixin nav-arrow(path, id, imgSrc)
+  a(href=`${path}`)
+    img(id=id src=imgSrc)
+
+mixin nav-header(path, prevPage, nextPage, title)
+  header#header
+    span=title
+    div
+      if prevPage
+        +nav-arrow(`${path}${prevPage}`, 'back', '/images/ic_arrow_back_white_36px.svg')
+      if nextPage
+        +nav-arrow(`${path}${nextPage}`, 'next-page', '/images/ic_arrow_forward_white_36px.svg')

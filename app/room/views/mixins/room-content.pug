@@ -1,0 +1,14 @@
+mixin room-content(cls)
+  main(class=cls)
+    each room, index in rooms
+      div.room(class=cls)
+        if rooms.length > 1
+          header= room.name
+            div.room-buttons
+              a(href=`/room/${room.number}`)
+                img(src="/images/ic_description_white_24px.svg")
+          div.arrow-down
+        div.room-content
+          for sensor in room.sensors
+            p.
+              #[i(class=`${sensor.type}` aria-hidden="true")] #{sensor.name}: #{sensor.value} #{sensor.unit}
