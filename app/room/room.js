@@ -2,16 +2,7 @@ let db = require('../db');
 
 let Room = class Room {
   count() {
-    return db.query(`
-      select
-        count(r)
-        from (select
-          distinct rooms.id
-            from rooms
-              join sensors
-                on rooms.id=sensors.room
-              join sensor_data
-              on sensors.id=sensor_data.sensor_id) r`).then(res => parseInt(res[0].count), 10);
+    return db.query(`select count(*) from rooms`).then(res => parseInt(res[0].count), 10);
   }
 
   get(offset, pageSize) {
