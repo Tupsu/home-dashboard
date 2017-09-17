@@ -14,7 +14,7 @@ let Room = class Room {
       SELECT
         rooms.name,
         json_agg(json_build_object('name', sensors.name, 'value', sd.value, 'type', sensors.type, 'unit', sensors.unit)) sensors,
-        row_number() over (order by rooms.name) number
+        row_number() over (order by rooms.id) number
       FROM rooms
       JOIN sensors
         ON rooms.id = sensors.room
