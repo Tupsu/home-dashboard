@@ -2,7 +2,11 @@ let db = require('../db');
 
 let Room = class Room {
   count() {
-    return db.query(`select count(*) from rooms`).then(res => parseInt(res[0].count), 10);
+    return db.query(`
+      SELECT
+        count(*)
+      FROM rooms`)
+      .then(res => parseInt(res[0].count), 10);
   }
 
   get(offset, pageSize) {
