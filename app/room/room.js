@@ -7,25 +7,26 @@ let Room = class Room {
 
   get(offset, pageSize) {
     return db.query(`
-        select
-          rooms.id id,
-          rooms.name,
-          json_agg(json_build_object('name', sensors.name, 'value', sensor_data.value, 'type', sensors.type, 'unit', sensors.unit)) sensors,
-          row_number() over (order by rooms.id) number
-            from rooms
-              join sensors
-                on rooms.id=sensors.room
-              join sensor_data
-                on sensors.id=sensor_data.sensor_id
-              where
-                sensor_data.id in
-                (select
-                  max(id)
-                    from sensor_data
-                      group by sensor_id)
-                        group by rooms.id
-                        order by rooms.id
-                        offset ${offset} limit ${pageSize}`);
+      SELECT
+        rooms.name,
+        json_agg(json_build_object('name', sensors.name, 'value', sd.value, 'type', sensors.type, 'unit', sensors.unit)) sensors,
+        row_number() over (order by rooms.name) number
+      FROM rooms
+      JOIN sensors
+        ON rooms.id = sensors.room
+      JOIN sensor_data sd
+        ON sensors.id = sd.sensor_id
+      JOIN (
+        SELECT
+          sensor_id,
+          MAX(timestamp) as timestamp
+        FROM sensor_data
+        GROUP BY sensor_id
+      ) sd2 ON sd.sensor_id = sd2.sensor_id AND sd.timestamp = sd2.timestamp
+      GROUP BY rooms.id
+      ORDER BY rooms.id
+      OFFSET ${offset}
+      LIMIT  ${pageSize}`);
   }
 };
 
